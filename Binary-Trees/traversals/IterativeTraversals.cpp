@@ -62,6 +62,42 @@ public:
         }
         return res;
     }
+
+    vector<int> postorderTraversal(TreeNode* root){
+        vector<int> res;
+
+        if(!root) return res;
+
+        stack<TreeNode*> st;
+
+        st.push(root);
+
+        while(!st.empty()){
+            auto current = st.top(); st.pop();
+
+            res.push_back(current->val);
+
+            if(current->left) st.push(current->left);
+            if(current->right) st.push(current->right);
+        }
+
+        reverse(res);
+
+        return res;
+    }
+private:
+    void reverse(vector<int> &array){
+        int start = 0; int end = array.size()-1;
+
+        while(start < end){
+            array[start] = array[start]^array[end];
+            array[end] = array[start]^array[end];
+            array[start] = array[start]^array[end];
+
+            start++;
+            end--;
+        }
+    }
 };
 
 
@@ -82,7 +118,7 @@ int main(){
 
     Solution* sol = new Solution();
 
-    vector<int> ans = sol->inorderTraversal(root);
+    vector<int> ans = sol->postorderTraversal(root);
 
     for(int val : ans) cout<<val<<" ";
     cout<<endl;
