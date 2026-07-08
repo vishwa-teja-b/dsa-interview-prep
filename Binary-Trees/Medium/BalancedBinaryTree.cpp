@@ -41,6 +41,4 @@ int main(){
     root->right->right = new TreeNode(7);
 
     Solution* sol = new Solution();
-
-
 }
